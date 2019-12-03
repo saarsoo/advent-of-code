@@ -27,29 +27,27 @@ namespace day_2_part_2
             int verb = 0;
 
             do {
-                if (noun == 12 && verb == 2)
-                {
-                }
                 output = RunMachineWithParams(instructions.ToArray(), noun, verb);
 
                 if (output == 19690720) {
                     Console.WriteLine($"Found noun {noun} and verb {verb} for output {output}!");
                     Console.WriteLine($"100 * {noun} + {verb} = {100 * noun + verb}");
+                    break;
                 } else {
                     Console.WriteLine($"Failed to find for noun {noun} and verb {verb}, output was {output}...");
                 }
 
-                if (noun < instructions.Length) noun++;
+                if (noun < 99) noun++;
                 else {
                     noun = 0;
                     verb++;
-                    if (verb > instructions.Length) {
+                    if (verb > 99) {
                         Console.WriteLine("Could not find a solution =(");
                         break;
                     }
                 }
 
-            } while(output != 19690720);
+            } while(true);
 
             return output;
         }
@@ -85,8 +83,9 @@ namespace day_2_part_2
                 var paramPos1 = instructions[address+1];
                 var paramPos2 = instructions[address+2];
                 
-                if (paramPos1 >= instructions.Length || paramPos2 >= instructions.Length)
-                    return -1;
+                if (paramPos1 >= instructions.Length || paramPos2 >= instructions.Length) {
+                    Console.WriteLine("Abort -- out of bounds!");
+                }
 
                 var param1 = instructions[paramPos1];
                 var param2 = instructions[paramPos2];
