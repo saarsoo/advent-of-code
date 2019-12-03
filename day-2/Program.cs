@@ -12,32 +12,32 @@ namespace day_2
                 return;
             }
 
-            var opCodes = args[0].Split(',').Select(a => int.Parse(a)).ToArray();
+            var instructions = args[0].Split(',').Select(a => int.Parse(a)).ToArray();
 
-            opCodes[1] = 12;
-            opCodes[2] = 2;
+            instructions[1] = 12;
+            instructions[2] = 2;
 
-            for (int i = 0; i < opCodes.Length; i += 4)
+            for (int i = 0; i < instructions.Length; i += 4)
             {
-                var oper = opCodes[i];
+                var oper = instructions[i];
 
                 if (oper == 99) {
                     break;
                 }
 
-                if (opCodes.Length < i + 4) {
-                    Console.WriteLine($"Invalid op codes line! {String.Join(",", opCodes.Skip(i))}");
+                if (instructions.Length < i + 4) {
+                    Console.WriteLine($"Invalid op codes line! {String.Join(",", instructions.Skip(i))}");
                     break;
                 }
 
-                var inPos1 = opCodes[i+1];
-                var inPos2 = opCodes[i+2];
+                var inPos1 = instructions[i+1];
+                var inPos2 = instructions[i+2];
                 
-                var in1 = opCodes[inPos1];
-                var in2 = opCodes[inPos2];
-                var outPos = opCodes[i+3];
+                var in1 = instructions[inPos1];
+                var in2 = instructions[inPos2];
+                var outPos = instructions[i+3];
 
-                opCodes[outPos] = oper switch
+                instructions[outPos] = oper switch
                 {
                     1 => in1 + in2,
                     2 => in1 * in2,
@@ -45,10 +45,10 @@ namespace day_2
                 };
 
                 var operStr = oper == 1 ? "+" : "*";
-                Console.WriteLine($"{oper},{inPos1},{inPos2},{outPos} ({in1} {operStr} {in2} = {opCodes[outPos]})");
+                Console.WriteLine($"{oper},{inPos1},{inPos2},{outPos} ({in1} {operStr} {in2} = {instructions[outPos]})");
             }
 
-            Console.WriteLine(String.Join(",", opCodes));
+            Console.WriteLine(String.Join(",", instructions));
         }
     }
 }
